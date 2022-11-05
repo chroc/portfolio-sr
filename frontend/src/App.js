@@ -16,7 +16,7 @@ const App = () => {
           <hr className='my-5'></hr>
           <About />
           <hr className='my-5'></hr>
-          <Contact />
+          
         </Container>
       </main>
       <Footer />

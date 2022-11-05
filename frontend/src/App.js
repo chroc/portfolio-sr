@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
 import About from './components/About';
+import Contact from './components/Contact';
 
 const App = () => {
   return (
@@ -12,7 +13,10 @@ const App = () => {
       <main className='py-3'>
         <Container className='appcontainer'>
           <Profile />
+          <hr className='my-5'></hr>
           <About />
+          <hr className='my-5'></hr>
+          <Contact />
         </Container>
       </main>
       <Footer />

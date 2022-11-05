@@ -14,7 +14,6 @@ const App = () => {
           <Profile />
           <About />
           <hr className='my-5'></hr>
-          <Contact />
         </Container>
       </main>
       <Footer />

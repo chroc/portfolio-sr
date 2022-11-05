@@ -10,8 +10,8 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <main className='py-3'>
-        <Container className='appcontainer'>
+      <main className='py-3 mainContainer'>
+        <Container>
           <Profile />
           <hr className='my-5'></hr>
           <About />

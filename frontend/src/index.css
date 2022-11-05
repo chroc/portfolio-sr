@@ -46,3 +46,29 @@ strong {
 .aboutexp {
     text-align: left;
 }
+
+.profilepic {
+    flex: auto;
+    margin-left: 8rem;
+}
+
+.aboutPic {
+    flex: auto;
+    margin-left: 8rem;
+}
+
+@media (max-width: 1028px) {
+    .mainContainer {
+        justify-content: center;
+        margin-left: 5%;
+    }
+    .profilepic {
+        margin: 0%;
+    }
+
+    .aboutPic {
+        margin: 0%;
+        width: 300px;
+        height: 300px;
+    }
+}

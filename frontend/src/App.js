@@ -13,7 +13,7 @@ const App = () => {
         <Container className='appcontainer'>
           <Profile />
           <About />
-          <hr className='my-5'></hr>
+
         </Container>
       </main>
       <Footer />

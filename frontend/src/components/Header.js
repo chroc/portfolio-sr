@@ -8,8 +8,8 @@ const Header = () => {
     return (
         <header>
             <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
-                <Container className='my-3'>
-                    <Navbar.Brand href="/">Sergio Rojas</Navbar.Brand>
+                <Container>
+                    <Navbar.Brand href="/">SR</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="navlinks">

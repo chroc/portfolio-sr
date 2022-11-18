@@ -13,9 +13,9 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="navlinks">
-                            <Nav.Link href="/about"><i className="fa-regular fa-address-card"></i> About Me</Nav.Link>
-                            <Nav.Link href="/projects"><i className="fa-solid fa-diagram-project"></i> Projects</Nav.Link>
-                            <Nav.Link href="/resume"><i className="fa-solid fa-file"></i> Resume</Nav.Link>
+                            <Nav.Link href="#about"><i className="fa-regular fa-address-card"></i> About Me</Nav.Link>
+                            <Nav.Link href="#projects"><i className="fa-solid fa-diagram-project"></i> Projects</Nav.Link>
+                            <Nav.Link href="#resume"><i className="fa-solid fa-file"></i> Resume</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

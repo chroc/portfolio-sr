@@ -27,16 +27,13 @@ h4, p {
     line-height: 2;
 }
 
-.description {
-    text-align: justify;
-}
-
-.aboutdesc {
+.description, .aboutdesc  {
     text-align: justify;
 }
 
 p, .techicons {
     color: #EFEFEF;
+    font-size: large;
 }
 
 strong {
@@ -57,6 +54,11 @@ strong {
     margin-left: 8rem;
 }
 
+.projectImg {
+    height: 205px;
+    width: auto;
+}
+
 @media (max-width: 1028px) {
     .mainContainer {
         justify-content: center;
@@ -70,5 +72,10 @@ strong {
         margin: 0%;
         width: 300px;
         height: 300px;
+    }
+
+    .projectImg {
+        height: auto;
+        width: auto;
     }
 }

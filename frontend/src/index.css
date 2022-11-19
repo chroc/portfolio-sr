@@ -59,6 +59,10 @@ strong {
     width: auto;
 }
 
+.charactersLeft {
+    font-size: 0.9rem;
+}
+
 @media (max-width: 1028px) {
     .mainContainer {
         justify-content: center;

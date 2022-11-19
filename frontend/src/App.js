@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Container } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Profile from './components/Profile';

@@ -9,6 +9,9 @@ const recruiterSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    message: {
+        type: String
     }
 }, {
     timestamps: true

@@ -40,10 +40,8 @@ const Contact = () => {
                 theme: "light",
             });
             return;
-        } else {
-            console.log('Token: ' + token);
         }
-
+        
         setLoading(true);
         setDisabled(true);
 

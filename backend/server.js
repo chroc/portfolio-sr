@@ -17,11 +17,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Home route
-app.get('/', (req, res) => {
-  res.send('Hey there!')
-});
-
 // POST request resume
 app.post('/api/resume', async (req, res) => {
   let errorMessage = '';

@@ -74,10 +74,6 @@ strong {
     font-size: 2.5rem;
 }
 
-.footer-icon {
-    
-}
-
 @media (max-width: 1028px) {
     .mainContainer {
         justify-content: center;

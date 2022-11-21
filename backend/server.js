@@ -153,7 +153,7 @@ app.post('/api/approve/:email', async (req, res) => {
 
 const port = process.env.PORT || 5000;
 
-// const __dirname = path.resolve();
+path.resolve();
 
 app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) => {

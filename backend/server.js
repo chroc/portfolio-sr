@@ -2,6 +2,7 @@ const express = require('express');
 const sgMail = require('@sendgrid/mail');
 const colors = require('colors');
 const dotenv = require('dotenv');
+const path = require('path');
 const { verify } = require('hcaptcha');
 const connectDB = require('./config/db');
 const Recruiter = require('./models/recruiterModel');
@@ -149,6 +150,12 @@ app.post('/api/approve/:email', async (req, res) => {
     res.status(500).send();
   }
   // res.send('Approve resume request');
+});
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 // Run Server...

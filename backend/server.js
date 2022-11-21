@@ -31,7 +31,6 @@ app.post('/api/resume', async (req, res) => {
   try {
     // captcha
     const secret = process.env.HCAPTCHA_SECRETKEY;
-    // const secret = '0x185B33931cCB9C76444585a57654f8b86c06c4C9';
     const token = req.body.token;
     const hcaptchaData = await verify(secret, token);
     // hcaptchaData.success
@@ -82,8 +81,8 @@ app.post('/api/resume', async (req, res) => {
   }
 });
 
-// GET reject req
-app.get('/api/reject/:email', async (req, res) => {
+// POST reject req
+app.post('/api/reject/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
     const recruiter = await Recruiter.findOne({ email: recruiterEmail });
@@ -117,8 +116,8 @@ app.get('/api/reject/:email', async (req, res) => {
   }
 });
 
-// GET approve req
-app.get('/api/approve/:email', async (req, res) => {
+// POST approve req
+app.post('/api/approve/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
     const recruiter = await Recruiter.findOne({ email: recruiterEmail });

@@ -30,7 +30,18 @@ const Projects = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                
+                <Col md={4}>
+                    <Card>
+                        <img className='projectImg' src='./images/KeeperApp.png' alt='keeper-app' />
+                        <Card.Body>
+                            <Card.Title>Keeper App</Card.Title>
+                            <Card.Text>Never forget an important thing. Note-taking service, Google Keep clone</Card.Text>
+                            <Form action="https://c2wclz.csb.app/" target="_blank">
+                                <Button type='submit'>View</Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
             </Row>
         </div>
     )

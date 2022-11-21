@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import FormContainer from './FormContainer';
 import axios from 'axios';
-import validator from 'validator';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import LoadingBox from './LoadingBox';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +15,8 @@ const Contact = () => {
     const [disabled, setDisabled] = useState(false);
     const [token, setToken] = useState('');
     const captchaRef = useRef();
+
+    const charactersLimit = 580;
 
     useEffect(() => {
         if (token)
@@ -50,7 +51,7 @@ const Contact = () => {
         const { data } = await axios.post('/api/resume', { 
             name: name.trim(),
             email: email.trim(),
-            optionalMessage: optionalMessage.trim().slice(0, 280),
+            optionalMessage: optionalMessage.trim().slice(0, charactersLimit),
             token
          });
 
@@ -102,7 +103,7 @@ const Contact = () => {
                 <Form.Group className="mb-3" controlId="optionalMessage">
                     <Form.Label>Message (optional)</Form.Label>
                     <Form.Control as="textarea" rows={3} placeholder="Additional comments..." onChange={(e) => setOptionalMessage(e.target.value)} />
-                    <span className='charactersLeft'>{280 - optionalMessage.length} characters remaining</span>
+                    <span className='charactersLeft'>{charactersLimit - optionalMessage.length} characters remaining</span>
                 </Form.Group>
                 <HCaptcha
                     sitekey={process.env.REACT_APP_HCAPTCHA_SITEKEY}

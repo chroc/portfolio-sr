@@ -8,9 +8,9 @@ const resumeRequest = ({ name, email, optionalMessage }) => {
     <h1>Recruiter ${name} is interested in your Resume:</h1>
     <h2>${email}</h2>
     <p>${optionalMessage}</p>
-    <a href="http://localhost:5000/api/reject/${email}">Reject</a>
+    <a href="${process.env.RESUMEREQ_URI}reject/${email}">Reject</a>
     <br>
-    <a href="http://localhost:5000/api/approve/${email}">Approve</a>
+    <a href="${process.env.RESUMEREQ_URI}approve/${email}">Approve</a>
     </div>`;
 };
 

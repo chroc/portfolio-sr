@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import FormContainer from './FormContainer';
 import axios from 'axios';
+import validator from 'validator';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import LoadingBox from './LoadingBox';
 import { ToastContainer, toast } from 'react-toastify';
+
 
 const Contact = () => {
     const [name, setName] = useState('');
@@ -11,15 +14,45 @@ const Contact = () => {
     const [optionalMessage, setOptionalMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [disabled, setDisabled] = useState(false);
+    const [token, setToken] = useState('');
+    const captchaRef = useRef();
+
+    useEffect(() => {
+        if (token)
+            console.log(`hCaptcha Token: ${token}`);
+    }, [token]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        
+        // validate captcha
+        // captchaRef.current.execute();
+        if (!token) {
+            toast.error("You must verify that you are a human", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        } else {
+            console.log('Token: ' + token);
+        }
+
         setLoading(true);
         setDisabled(true);
 
         // Request resume
-        // const slicedMessage = optionalMessage.slice(0, 280);
-        const { data } = await axios.post('/api/resume', { name, email, optionalMessage: optionalMessage.slice(0, 280) });
+        const { data } = await axios.post('/api/resume', { 
+            name: name.trim(),
+            email: email.trim(),
+            optionalMessage: optionalMessage.trim().slice(0, 280),
+            token
+         });
 
         // console.log(data);
 
@@ -68,9 +101,14 @@ const Contact = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="optionalMessage">
                     <Form.Label>Message (optional)</Form.Label>
-                    <Form.Control as="textarea" rows={3} placeholder="Additional comments..." onChange={(e) => setOptionalMessage(e.target.value)}/>
+                    <Form.Control as="textarea" rows={3} placeholder="Additional comments..." onChange={(e) => setOptionalMessage(e.target.value)} />
                     <span className='charactersLeft'>{280 - optionalMessage.length} characters remaining</span>
                 </Form.Group>
+                <HCaptcha
+                    sitekey={process.env.REACT_APP_HCAPTCHA_SITEKEY}
+                    onVerify={setToken}
+                    ref={captchaRef}
+                />
                 <Button className="my-2" variant="primary" type="submit" disabled={disabled}>
                     Get Resume
                 </Button>

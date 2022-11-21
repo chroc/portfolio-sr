@@ -63,6 +63,21 @@ strong {
     font-size: 0.9rem;
 }
 
+.singleCol {
+    max-width: 220px;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-icons-box {
+    font-size: 2.5rem;
+}
+
+.footer-icon {
+    
+}
+
 @media (max-width: 1028px) {
     .mainContainer {
         justify-content: center;

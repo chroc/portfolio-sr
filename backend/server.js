@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// POST request resume
+// POST request Resume
 app.post('/api/resume', async (req, res) => {
   let errorMessage = '';
   const email = req.body.email;

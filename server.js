@@ -4,13 +4,13 @@ const colors = require('colors');
 const dotenv = require('dotenv');
 const path = require('path');
 const { verify } = require('hcaptcha');
-const connectDB = require('./config/db');
-const Recruiter = require('./models/recruiterModel');
-const { resumeRequest, rejectRequestTemplate, approveRequestTemplate } = require('./utils');
+const connectDB = require('./backend/config/db');
+const Recruiter = require('./backend/models/recruiterModel');
+const { resumeRequest, rejectRequestTemplate, approveRequestTemplate } = require('./backend/utils');
 
 dotenv.config();
 
-connectDB();
+connectDB(process.env.MONGO_URI);
 
 const app = express();
 
@@ -77,7 +77,7 @@ app.post('/api/resume', async (req, res) => {
 });
 
 // POST reject req
-app.post('/api/reject/:email', async (req, res) => {
+app.get('/api/reject/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
     const recruiter = await Recruiter.findOne({ email: recruiterEmail });
@@ -112,7 +112,7 @@ app.post('/api/reject/:email', async (req, res) => {
 });
 
 // POST approve req
-app.post('/api/approve/:email', async (req, res) => {
+app.get('/api/approve/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
     const recruiter = await Recruiter.findOne({ email: recruiterEmail });
@@ -148,9 +148,9 @@ app.post('/api/approve/:email', async (req, res) => {
 
 const port = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, './frontend/build')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'));
 });
 
 // Run Server...

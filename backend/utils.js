@@ -8,12 +8,8 @@ const resumeRequest = ({ name, email, optionalMessage }) => {
     <h1>${name} is interested in your Resume:</h1>
     <h2>Email: ${email}</h2>
     <p style="font-size: medium;">${optionalMessage}</p>
-    <form action="${process.env.RESUMEREQ_URI}reject/${email}" method="post" target="_blank" style="display: inline-block;">
-        <input style="background-color: red; color: white; font-weight: bold;" type="submit" value="Reject" />
-    </form>
-    <form action="${process.env.RESUMEREQ_URI}approve/${email}" method="post" target="_blank" style="display: inline-block;">
-        <input style="background-color: #4DB516; color: white; font-weight: bold;" type="submit" value="Approve" />
-    </form>
+    <a href="${process.env.RESUMEREQ_URI}reject/${email}" target="_blank" style="background-color: red; color: white; font-weight: bold; padding: 1em 1.5em; text-decoration: none; display: inline-block;">Reject</a>
+    <a href="${process.env.RESUMEREQ_URI}approve/${email}" target="_blank" style="background-color: #4DB516; color: white; font-weight: bold; padding: 1em 1.5em; text-decoration: none; display: inline-block;">Approve</a>
     </div>`;
 };
 

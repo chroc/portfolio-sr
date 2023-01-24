@@ -18,6 +18,10 @@ h2 {
     font-size: 2rem;
 }
 
+.webtitle {
+    text-align: center;
+}
+
 p {
     display: inline-block;
     font-size: large;

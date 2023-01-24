@@ -8,6 +8,7 @@ const Profile = () => {
             <Row>
                 <Col>
                     <img className='my-3 profilepic' src='./images/sergioprofilepic.PNG'></img>
+                    <h2 className='my-3 webtitle'>{"<Web Developer />"}</h2>
                 </Col>
                 <Col>
                     <h1 className='my-3'>Hey, I'm Sergio.</h1>

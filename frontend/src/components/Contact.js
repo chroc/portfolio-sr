@@ -27,7 +27,6 @@ const Contact = () => {
         e.preventDefault();
         
         // validate captcha
-        // captchaRef.current.execute();
         if (!token) {
             toast.error("You must verify that you are a human", {
                 position: "bottom-center",

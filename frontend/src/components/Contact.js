@@ -46,8 +46,8 @@ const Contact = () => {
 
         // Request resume
         const { data } = await axios.post('/api/resume', { 
-            name: name.trim(),
-            email: email.trim(),
+            name: name.trim().slice(0, 100),
+            email: email.trim().slice(0, 256),
             optionalMessage: optionalMessage.trim().slice(0, charactersLimit),
             token
          });

@@ -76,7 +76,7 @@ app.post('/api/resume', async (req, res) => {
   }
 });
 
-// POST reject req
+// GET reject req
 app.get('/api/reject/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
@@ -111,7 +111,7 @@ app.get('/api/reject/:email', async (req, res) => {
   }
 });
 
-// POST approve req
+// GET approve req
 app.get('/api/approve/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {

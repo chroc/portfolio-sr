@@ -10,7 +10,7 @@ const { resumeRequest, rejectRequestTemplate, approveRequestTemplate } = require
 
 dotenv.config();
 
-connectDB(process.env.MONGO_URI);
+// connectDB(process.env.MONGO_URI);
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/api/resume', async (req, res) => {
   let errorMessage = '';
   const email = req.body.email;
-  const newRecruiter = await Recruiter.findOne({ email });
+  // const newRecruiter = await Recruiter.findOne({ email });
 
   try {
     // captcha
@@ -34,36 +34,26 @@ app.post('/api/resume', async (req, res) => {
     if (hcaptchaData.success) {
       console.log('hCaptcha verification success!'.green);
       // verify the email has not been registered yet
-      if (newRecruiter) {
-        errorMessage = `${email} already sent a request`;
-        console.log(errorMessage.yellow);
-        res.send({ errorMessage });
-      } else {
-        // save recruiter
-        const recruiter = new Recruiter({ name: req.body.name, email, message: req.body.optionalMessage });
-        await recruiter.save();
-        console.log(`Recruiter ${req.body.name} saved!`.green);
 
-        // send email to admin
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        const msg = {
-          to: process.env.EMAIL_ADMIN,
-          from: process.env.EMAIL_SENDER,
-          subject: `New Portfolio Request from ${email}`,
-          html: resumeRequest(req.body),
-        };
-        sgMail
-          .send(msg)
-          .then(() => {
-            console.log(`Email sent!`)
-          })
-          .catch((error) => {
-            console.error(error.red)
-          });
+      // send email to admin
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: process.env.EMAIL_ADMIN,
+        from: process.env.EMAIL_SENDER,
+        subject: `New Portfolio Request from ${email}`,
+        html: resumeRequest(req.body),
+      };
+      sgMail
+        .send(msg)
+        .then(() => {
+          console.log(`Email sent!`)
+        })
+        .catch((error) => {
+          console.error(error.red)
+        });
 
-        const message = 'Thank you! I will contact you soon';
-        res.status(201).send({ recruiter, message });
-      }
+      const message = 'Thank you! I will contact you soon';
+      res.status(201).send({ recruiter, message });
     } else {
       errorMessage = 'hCaptcha verification failed';
       console.log(errorMessage.red);
@@ -80,31 +70,25 @@ app.post('/api/resume', async (req, res) => {
 app.get('/api/reject/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
-    const recruiter = await Recruiter.findOne({ email: recruiterEmail });
+    // const recruiter = await Recruiter.findOne({ email: recruiterEmail });
     // console.log(recruiter);
-    if (recruiter) {
-      // send reject email
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      const msg = {
-        to: recruiterEmail,
-        from: process.env.EMAIL_SENDER,
-        subject: `Resume request not possible`,
-        html: rejectRequestTemplate(recruiter.name),
-      };
-      sgMail
-        .send(msg)
-        .then(() => {
-          console.log(`Rejected email sent`.green)
-        })
-        .catch((error) => {
-          console.error(error.red)
-        });
-      res.status(200).send({ message: 'Rejected email sent!' });
-    } else {
-      const errorMessage = 'Email not found';
-      console.log(errorMessage.red);
-      res.status(404).send({ errorMessage });
-    }
+    // send reject email
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: recruiterEmail,
+      from: process.env.EMAIL_SENDER,
+      subject: `Resume request not possible`,
+      html: rejectRequestTemplate(recruiter.name),
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log(`Rejected email sent`.green)
+      })
+      .catch((error) => {
+        console.error(error.red)
+      });
+    res.status(200).send({ message: 'Rejected email sent!' });
   } catch (error) {
     console.log(error.message.red);
     res.status(500).send();
@@ -115,30 +99,24 @@ app.get('/api/reject/:email', async (req, res) => {
 app.get('/api/approve/:email', async (req, res) => {
   const recruiterEmail = req.params.email;
   try {
-    const recruiter = await Recruiter.findOne({ email: recruiterEmail });
-    if (recruiter) {
-      // send approve email
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      const msg = {
-        to: recruiterEmail,
-        from: process.env.EMAIL_SENDER,
-        subject: `Resume Sergio Rojas`,
-        html: approveRequestTemplate(recruiter.name),
-      };
-      sgMail
-        .send(msg)
-        .then(() => {
-          console.log(`Approved email sent!`.green)
-        })
-        .catch((error) => {
-          console.error(error.red)
-        });
-      res.status(200).send({ message: 'Approved email sent!' });
-    } else {
-      const errorMessage = 'Email not found';
-      console.log(errorMessage.red);
-      res.status(404).send({ errorMessage });
-    }
+    // const recruiter = await Recruiter.findOne({ email: recruiterEmail });
+    // send approve email
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: recruiterEmail,
+      from: process.env.EMAIL_SENDER,
+      subject: `Resume Sergio Rojas`,
+      html: approveRequestTemplate(recruiter.name),
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log(`Approved email sent!`.green)
+      })
+      .catch((error) => {
+        console.error(error.red)
+      });
+    res.status(200).send({ message: 'Approved email sent!' });
   } catch (error) {
     console.log(error.message.red);
     res.status(500).send();

@@ -53,7 +53,7 @@ app.post('/api/resume', async (req, res) => {
         });
 
       const message = 'Thank you! I will contact you soon';
-      res.status(201).send({ recruiter, message });
+      res.status(201).send({ message });
     } else {
       errorMessage = 'hCaptcha verification failed';
       console.log(errorMessage.red);
